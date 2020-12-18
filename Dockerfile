@@ -1,4 +1,4 @@
-FROM openanalytics/r-base
+FROM openanalytics/r-base:4.0.2
 
 MAINTAINER Aroon Chande "achande@ihrc.com, mail@aroonchande.com"
 
