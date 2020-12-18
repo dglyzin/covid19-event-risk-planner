@@ -16,7 +16,7 @@ library(withr)
 # Sys.setenv(PATH = with_path('/projects/covid19/bin', Sys.getenv("PATH")))
 
 
-get_token()
+#get_token()
 
 args <- commandArgs(trailingOnly = TRUE)
 current_time <- args[1]
