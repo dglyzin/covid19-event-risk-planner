@@ -58,7 +58,7 @@ RUN apt-get install -y \
     libcurl4-gnutls-dev \
     libcairo2-dev \
     libxt-dev \
-    libssl-dev
+    libgit2-dev
 
 RUN apt-get update && apt-get install -y \
     libxml2-dev
@@ -91,7 +91,7 @@ COPY bin/phantomjs /usr/bin/
 RUN R -e 'remotes::install_github("ar0ch/sever")'
 # copy the app to the image
 COPY Rprofile.site /usr/lib/R/etc/
-COPY .rtweet_token.rds /root/.rtweet_token.rds
+#COPY .rtweet_token.rds /root/.rtweet_token.rds
 COPY Renviron /root/.Renviron
 
 ENV TZ=America/New_York
@@ -106,14 +106,19 @@ RUN sudo echo -e "1 17 * * * /srv/shiny-server/makeDailyMaps.sh 1 \n\
 1 */4 * * * perl -le 'sleep rand 700' && /srv/shiny-server/update_daily.sh \n\
 " > /var/spool/cron/crontabs/root
 
-RUN mkdir /root/.ssh
-COPY docker_github /root/.ssh/id_rsa
-COPY docker_github.pub /root/.ssh/id_rsa.pub
-RUN ssh-keyscan -H github.com >> /root/.ssh/known_hosts
-RUN git config --global user.email "c19r@atc.io"
-RUN git config --global user.name "c19r-bot"
-RUN git clone git@github.com:appliedbinf/covid19-event-risk-planner.git /root/repo
+#RUN mkdir /root/.ssh
+#COPY docker_github /root/.ssh/id_rsa
+#COPY docker_github.pub /root/.ssh/id_rsa.pub
+#RUN ssh-keyscan -H github.com >> /root/.ssh/known_hosts
+#RUN git config --global user.email "c19r@atc.io"
+#RUN git config --global user.name "c19r-bot"
+#RUN git clone git@github.com:appliedbinf/covid19-event-risk-planner.git /root/repo
 
+RUN /srv/shiny-server/makeDailyMaps.sh 0
+RUN /srv/shiny-server/makeEUMaps.sh
+RUN /srv/shiny-server/makeDailyPlots.sh
+RUN /srv/shiny-server/update_current.sh
+RUN /srv/shiny-server/update_daily.sh
 
 COPY COVID19-Event-Risk-Planner /srv/shiny-server
 
