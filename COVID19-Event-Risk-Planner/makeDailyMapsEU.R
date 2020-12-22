@@ -489,6 +489,13 @@ getDataDenmark <- function(){
   # denmark_data_join <<- inner_join(dataTable,DanishPop, by = 'Municipality') %>% rename(name = Municipality, date = Date, difference = Difference, pop = Population)
 }
 
+
+getDataRussia <- function(){
+  russia_geom <- st_read('map_data/russia.geojson')
+
+}
+
+
 maplabsDenmark <- function(riskData) {
   riskData <- riskData %>%
     mutate(risk = case_when(
@@ -567,6 +574,7 @@ getDataSpain()
 getDataCzech()
 getDataSweden()
 getDataDenmark()
+getDataRussia()
 getDataIreland()
 
 scale_factor = 10/14
@@ -721,6 +729,15 @@ for (asc_bias in asc_bias_list) {
         opacity = 1.0, fillOpacity = 0.7,
         #fillColor = ~ austria_pal(risk),
         fillColor = ~ austria_pal(0.4),
+        highlight = highlightOptions(weight = 1),
+        #label = maplabsDenmark(denmark_riskdt_map)
+      )  %>%
+      addPolygons(
+        data = russia_geom,
+        color = "#444444", weight = 0.2, smoothFactor = 0.1,
+        opacity = 1.0, fillOpacity = 0.7,
+        #fillColor = ~ austria_pal(risk),
+        fillColor = ~ austria_pal(14),
         highlight = highlightOptions(weight = 1),
         #label = maplabsDenmark(denmark_riskdt_map)
       )  %>%
