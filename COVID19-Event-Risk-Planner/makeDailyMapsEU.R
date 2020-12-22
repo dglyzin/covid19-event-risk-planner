@@ -632,6 +632,7 @@ for (asc_bias in asc_bias_list) {
     #  mutate(risk = if_else(Nr > 10, round(calc_risk(Nr, size, pop)), 0))
     
     #denmark_riskdt_map <- denmark_geom %>% left_join(denmark_riskdt, by = "name")
+    denmark_riskdt_map <- denmark_geom 
 
     ireland_riskdt <- ireland_data_Nr %>%
       mutate(risk = if_else(Nr > 10, round(calc_risk(Nr, size, pop)), 0))
@@ -714,14 +715,15 @@ for (asc_bias in asc_bias_list) {
         highlight = highlightOptions(weight = 1),
         label = maplabsSweden(sweden_riskdt_map)
       ) %>%
-      #addPolygons(
-      #  data = denmark_riskdt_map,
-      #  color = "#444444", weight = 0.2, smoothFactor = 0.1,
-      #  opacity = 1.0, fillOpacity = 0.7,
-      #  fillColor = ~ austria_pal(risk),
-      #  highlight = highlightOptions(weight = 1),
-      #  label = maplabsDenmark(denmark_riskdt_map)
-      #)  %>%
+      addPolygons(
+        data = denmark_riskdt_map,
+        color = "#444444", weight = 0.2, smoothFactor = 0.1,
+        opacity = 1.0, fillOpacity = 0.7,
+        #fillColor = ~ austria_pal(risk),
+        fillColor = ~ austria_pal(0.4),
+        highlight = highlightOptions(weight = 1),
+        #label = maplabsDenmark(denmark_riskdt_map)
+      )  %>%
       addPolygons(
         data = ireland_riskdt_map,
         color = "#444444", weight = 0.2, smoothFactor = 0.1,
