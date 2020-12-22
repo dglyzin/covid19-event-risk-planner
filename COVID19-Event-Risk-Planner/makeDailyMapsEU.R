@@ -566,7 +566,7 @@ getDataFrance()
 getDataSpain()
 getDataCzech()
 getDataSweden()
-getDataDenmark()
+#getDataDenmark()
 getDataIreland()
 
 scale_factor = 10/14
@@ -582,7 +582,7 @@ for (asc_bias in asc_bias_list) {
   spain_data_Nr <- spain_data_join %>% mutate(Nr = (cases - cases_past) * asc_bias * scale_factor) 
   czech_data_Nr <- czech_data_join %>% mutate(Nr = cases * asc_bias * scale_factor) 
   sweden_data_Nr <- sweden_data_join %>% mutate(Nr = (cases - cases_past) * asc_bias * scale_factor) 
-  denmark_data_Nr <- denmark_data_join %>% mutate(Nr = difference * asc_bias * scale_factor) 
+  #denmark_data_Nr <- denmark_data_join %>% mutate(Nr = difference * asc_bias * scale_factor) 
   ireland_data_Nr <- ireland_data_join %>% mutate(Nr = (cases - cases_past) * asc_bias * scale_factor) 
 
   for (size in event_size){
@@ -628,10 +628,10 @@ for (asc_bias in asc_bias_list) {
     
     sweden_riskdt_map <- sweden_geom %>% left_join(sweden_riskdt, by = c("name" = "County")) 
 
-    denmark_riskdt <- denmark_data_Nr %>%
-      mutate(risk = if_else(Nr > 10, round(calc_risk(Nr, size, pop)), 0))
+    #denmark_riskdt <- denmark_data_Nr %>%
+    #  mutate(risk = if_else(Nr > 10, round(calc_risk(Nr, size, pop)), 0))
     
-    denmark_riskdt_map <- denmark_geom %>% left_join(denmark_riskdt, by = "name")
+    #denmark_riskdt_map <- denmark_geom %>% left_join(denmark_riskdt, by = "name")
 
     ireland_riskdt <- ireland_data_Nr %>%
       mutate(risk = if_else(Nr > 10, round(calc_risk(Nr, size, pop)), 0))
@@ -714,14 +714,14 @@ for (asc_bias in asc_bias_list) {
         highlight = highlightOptions(weight = 1),
         label = maplabsSweden(sweden_riskdt_map)
       ) %>%
-      addPolygons(
-        data = denmark_riskdt_map,
-        color = "#444444", weight = 0.2, smoothFactor = 0.1,
-        opacity = 1.0, fillOpacity = 0.7,
-        fillColor = ~ austria_pal(risk),
-        highlight = highlightOptions(weight = 1),
-        label = maplabsDenmark(denmark_riskdt_map)
-      )  %>%
+      #addPolygons(
+      #  data = denmark_riskdt_map,
+      #  color = "#444444", weight = 0.2, smoothFactor = 0.1,
+      #  opacity = 1.0, fillOpacity = 0.7,
+      #  fillColor = ~ austria_pal(risk),
+      #  highlight = highlightOptions(weight = 1),
+      #  label = maplabsDenmark(denmark_riskdt_map)
+      #)  %>%
       addPolygons(
         data = ireland_riskdt_map,
         color = "#444444", weight = 0.2, smoothFactor = 0.1,
