@@ -438,55 +438,55 @@ getDataDenmark <- function(){
   
   denmark_geom <<- geomDanish
 
-  webpages<-read_html("https://covid19.ssi.dk/overvagningsdata/download-fil-med-overvaagningdata")
-  #extract the html blocks which are strong and contain links
-  JAM = webpages %>% html_nodes("blockquote") %>% html_nodes("a")
-  #JAM[2] should be the download link -- unless the website changes...Not sure if there is an easy way to double check this is the right code block?
-  #split the string to find the link using \"
-  DOWNLOADLINK = strsplit(as.character(JAM[1]),"\"")[[1]][2]
-  DOWNLOADLINK = paste0(DOWNLOADLINK,".zip")  #need to add .zip extension in order for the download/extraction process to perform correctly in R.
-  #Have the download link!
-  
-  # 2.) download and extract data:
-  temp <- tempfile() #temporary file for download
-  temp2 <- tempfile()#temporary file for extraction
-  download.file(DOWNLOADLINK,temp)
-  unzip(zipfile = temp, exdir = temp2)
-  DanishData  <- read.csv(file.path(temp2, "Municipality_cases_time_series.csv"),sep=";",encoding="UTF-8", stringsAsFactors = F)
-  unlink(temp)
-  unlink(temp2)
-  
-  DanishCounty <- names(DanishData)[2:length(names(DanishData))]
-  DanishData$date_sample <- as.Date(DanishData$date_sample)
-  getDanishData <- function(code){
-    subdata <- DanishData[,c("date_sample",DanishCounty[code])]
-    subdata$CumCases <- cumsum(subdata[,DanishCounty[code]])
-    x <- length(subdata$date_sample)
-    difference <- round((subdata[x,'CumCases'] - subdata[x-14,'CumCases'])*10/14)
-    vec <- data.frame(Municipality = DanishCounty[code], Date = subdata$date_sample[x], Difference = difference)
-    return(vec)
-  }
-  
-  dataTable <- data.frame(Municipality = as.character(), Date = as.character(), Difference = as.numeric())
-  for (i in 1:length(DanishCounty)){
-    vec <- getDanishData(i)
-    dataTable <- rbind(dataTable,vec)
-  }
-  dataTable <- dataTable %>% mutate(Municipality = as.character(Municipality), Date = as.Date(Date))
-  DanishPop <- as.data.frame(read.csv('map_data/denmark_pop.csv', encoding="UTF-8", stringsAsFactors = F)) ## get from Statistics Denmark: https://www.statbank.dk/statbank5a/SelectVarVal/saveselections.asp
-  names(DanishPop) <- c("Municipality",'Population')
-  
-  # make the population column as numeric
-  DanishPop$Population <- as.numeric(gsub(" ","",DanishPop$Population))
-  
-  # adjust some municipalities' names so that they match with population file
-  dataTable$Municipality[which(dataTable$Municipality == "Høje.Taastrup")] <-  "Høje-Taastrup"
-  dataTable$Municipality[which(dataTable$Municipality == "Faaborg.Midtfyn")] <-  "Faaborg-Midtfyn"
-  dataTable$Municipality[which(dataTable$Municipality == "Lyngby.Taarbæk")] <-  "Lyngby-Taarbæk"
-  dataTable$Municipality[which(dataTable$Municipality == "Ringkøbing.Skjern")] <-  "Ringkøbing-Skjern"
-  dataTable$Municipality[which(dataTable$Municipality == "Ikast.Brande")] <-  "Ikast-Brande"
-  
-  denmark_data_join <<- inner_join(dataTable,DanishPop, by = 'Municipality') %>% rename(name = Municipality, date = Date, difference = Difference, pop = Population)
+  # webpages<-read_html("https://covid19.ssi.dk/overvagningsdata/download-fil-med-overvaagningdata")
+  # #extract the html blocks which are strong and contain links
+  # JAM = webpages %>% html_nodes("blockquote") %>% html_nodes("a")
+  # #JAM[2] should be the download link -- unless the website changes...Not sure if there is an easy way to double check this is the right code block?
+  # #split the string to find the link using \"
+  # DOWNLOADLINK = strsplit(as.character(JAM[1]),"\"")[[1]][2]
+  # DOWNLOADLINK = paste0(DOWNLOADLINK,".zip")  #need to add .zip extension in order for the download/extraction process to perform correctly in R.
+  # #Have the download link!
+  # 
+  # # 2.) download and extract data:
+  # temp <- tempfile() #temporary file for download
+  # temp2 <- tempfile()#temporary file for extraction
+  # download.file(DOWNLOADLINK,temp)
+  # unzip(zipfile = temp, exdir = temp2)
+  # DanishData  <- read.csv(file.path(temp2, "Municipality_cases_time_series.csv"),sep=";",encoding="UTF-8", stringsAsFactors = F)
+  # unlink(temp)
+  # unlink(temp2)
+  # 
+  # DanishCounty <- names(DanishData)[2:length(names(DanishData))]
+  # DanishData$date_sample <- as.Date(DanishData$date_sample)
+  # getDanishData <- function(code){
+  #   subdata <- DanishData[,c("date_sample",DanishCounty[code])]
+  #   subdata$CumCases <- cumsum(subdata[,DanishCounty[code]])
+  #   x <- length(subdata$date_sample)
+  #   difference <- round((subdata[x,'CumCases'] - subdata[x-14,'CumCases'])*10/14)
+  #   vec <- data.frame(Municipality = DanishCounty[code], Date = subdata$date_sample[x], Difference = difference)
+  #   return(vec)
+  # }
+  # 
+  # dataTable <- data.frame(Municipality = as.character(), Date = as.character(), Difference = as.numeric())
+  # for (i in 1:length(DanishCounty)){
+  #   vec <- getDanishData(i)
+  #   dataTable <- rbind(dataTable,vec)
+  # }
+  # dataTable <- dataTable %>% mutate(Municipality = as.character(Municipality), Date = as.Date(Date))
+  # DanishPop <- as.data.frame(read.csv('map_data/denmark_pop.csv', encoding="UTF-8", stringsAsFactors = F)) ## get from Statistics Denmark: https://www.statbank.dk/statbank5a/SelectVarVal/saveselections.asp
+  # names(DanishPop) <- c("Municipality",'Population')
+  # 
+  # # make the population column as numeric
+  # DanishPop$Population <- as.numeric(gsub(" ","",DanishPop$Population))
+  # 
+  # # adjust some municipalities' names so that they match with population file
+  # dataTable$Municipality[which(dataTable$Municipality == "Høje.Taastrup")] <-  "Høje-Taastrup"
+  # dataTable$Municipality[which(dataTable$Municipality == "Faaborg.Midtfyn")] <-  "Faaborg-Midtfyn"
+  # dataTable$Municipality[which(dataTable$Municipality == "Lyngby.Taarbæk")] <-  "Lyngby-Taarbæk"
+  # dataTable$Municipality[which(dataTable$Municipality == "Ringkøbing.Skjern")] <-  "Ringkøbing-Skjern"
+  # dataTable$Municipality[which(dataTable$Municipality == "Ikast.Brande")] <-  "Ikast-Brande"
+  # 
+  # denmark_data_join <<- inner_join(dataTable,DanishPop, by = 'Municipality') %>% rename(name = Municipality, date = Date, difference = Difference, pop = Population)
 }
 
 maplabsDenmark <- function(riskData) {
@@ -566,7 +566,7 @@ getDataFrance()
 getDataSpain()
 getDataCzech()
 getDataSweden()
-#getDataDenmark()
+getDataDenmark()
 getDataIreland()
 
 scale_factor = 10/14
