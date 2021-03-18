@@ -491,7 +491,7 @@ getDataDenmark <- function(){
 
 
 getDataRussia <- function(){
-  russia_geom <- st_read('map_data/russia.geojson')
+  russia_geom <<- st_read('map_data/russia.geojson')
 
 }
 
