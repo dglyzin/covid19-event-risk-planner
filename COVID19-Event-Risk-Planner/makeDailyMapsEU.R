@@ -493,6 +493,56 @@ getDataDenmark <- function(){
 getDataRussia <- function(){
   russia_geom <<- st_read('map_data/russia.geojson')
 
+  data <- read.csv('/home/user/Рабочий стол/ru_script/corona_stat.csv', sep = ";") %>%
+    mutate(date = as_date(date)) %>%
+    arrange(desc(date))
+  pop <- read.csv('/home/user/Рабочий стол/ru_script/russia_pop.csv', sep = ",")
+  
+  converter <- pop %>% select(c("code", "name"))
+  
+  russia_geom <<- russia_geom %>%
+    mutate(name = main_en_name) %>%
+    inner_join(converter, by = "name") %>%
+    select(-c("name"))
+  
+  cur_date <- ymd(gsub("-", "", Sys.Date())) - 1
+  past_date <- ymd(cur_date) - 14
+  
+  data_cur <<- data %>%
+    group_by(code) %>%
+    summarise(code = first(code), cases = first(sick), date = first(date)) %>%
+    as.data.frame()
+  
+  data_past <<- data %>%
+    filter(date <= past_date) %>%
+    group_by(code) %>%
+    summarise(code = first(code), cases = first(sick), date = first(date)) %>%
+    as.data.frame()
+  
+  russia_data_join <<- data_cur %>%
+    inner_join(data_past, data_past, by = "code", suffix = c("", "_past")) %>%
+    inner_join(pop, by = "code") %>%
+    mutate(n = date - date_past) %>%
+    select(-c("name"))
+  
+  russia_pal <<- colorBin("YlOrRd", bins = c(0, 1, 25, 50, 75, 99, 100))
+  russia_legendlabs <<- c("< 1", " 1-25", "25-50", "50-75", "75-99", "> 99", "No or missing data")
+}
+
+maplabsRussia <- function(riskData) {
+  riskData <- riskData %>%
+    mutate(risk = case_when(
+      risk == 100 ~ "> 99",
+      risk == 0 ~ "< 1",
+      is.na(risk) ~ "No data",
+      TRUE ~ as.character(risk)
+    ))
+  labels <- paste0(
+    "<strong>", paste0(riskData$main_full_name), "</strong><br/>",
+    "Текущий уровень риска: <b>", riskData$risk, ifelse(riskData$risk == "No data", "", "&#37;"), "</b><br/>",
+    "Дата последнего обновления: ", substr(riskData$date, 1, 10)
+  ) %>% lapply(htmltools::HTML)
+  return(labels)
 }
 
 
@@ -581,7 +631,7 @@ scale_factor = 10/14
 
 for (asc_bias in asc_bias_list) {
 
-
+  russia_data_Nr <- russia_data_join %>% mutate(Nr = (cases - cases_past) * asc_bias * scale_factor)
   uk_data_Nr <- uk_data_join %>% mutate(Nr = (cases - cases_past) * asc_bias * scale_factor)
   italy_data_Nr <- italy_data_join %>% mutate(Nr = (cases - cases_past) * asc_bias * scale_factor)
   swiss_data_Nr <- swiss_data_join %>% mutate(Nr = (cases - cases_past) * asc_bias * scale_factor)
@@ -594,6 +644,12 @@ for (asc_bias in asc_bias_list) {
   ireland_data_Nr <- ireland_data_join %>% mutate(Nr = (cases - cases_past) * asc_bias * scale_factor) 
 
   for (size in event_size){
+
+    russia_riskdt <- russia_data_Nr %>%
+      mutate(risk = if_else(Nr > 10, round(calc_risk(Nr, size, pop)), 0))
+    
+    russia_riskdt_map <- russia_geom %>% left_join(russia_riskdt, by = c("code"))
+
     uk_riskdt <- uk_data_Nr %>%
       mutate(risk = if_else(Nr > 10, round(calc_risk(Nr, size, pop)), 0))
 
@@ -652,7 +708,7 @@ for (asc_bias in asc_bias_list) {
 
     map <- leaflet() %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
-      setView(lat = 48.6, lng = 7.17, zoom = 4) %>%
+      setView(lat = 67.2720426739952, lng = 108.63281250000001, zoom = 3) %>%
       # fitBounds(7.5, 47.5, 9, 46) %>%
       addPolygons(
         data = europe, 
@@ -733,13 +789,12 @@ for (asc_bias in asc_bias_list) {
         #label = maplabsDenmark(denmark_riskdt_map)
       )  %>%
       addPolygons(
-        data = russia_geom,
+        data = russia_riskdt_map,
         color = "#444444", weight = 0.2, smoothFactor = 0.1,
         opacity = 1.0, fillOpacity = 0.7,
-        #fillColor = ~ austria_pal(risk),
-        fillColor = ~ austria_pal(14),
+        fillColor = ~ russia_pal(risk),
         highlight = highlightOptions(weight = 1),
-        #label = maplabsDenmark(denmark_riskdt_map)
+        label = maplabsRussia(russia_riskdt_map)
       )  %>%
       addPolygons(
         data = ireland_riskdt_map,
