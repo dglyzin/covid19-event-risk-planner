@@ -51,7 +51,7 @@ state_pops <- read.delim("state_pops.tsv", header = T, sep = "\t", stringsAsFact
 state_data <- state_current %>%
   select(state, positive) %>%
   arrange(state)
-state_data$C_i <- state_data$positive - states_historic$positive
+state_data$C_i <- state_data$positive # - states_historic$positive
 
 
 xblock <- c(10, 50, 100, 1000, 10000)

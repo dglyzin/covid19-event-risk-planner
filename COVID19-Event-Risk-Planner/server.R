@@ -43,7 +43,7 @@ get_data <- function() {
   state_data <<- state_current %>%
     select(state, positive) %>%
     arrange(state)
-  state_data$C_i <<- round((state_data$positive - states_historic$positive)  * 10 / 14)
+  state_data$C_i <<- round((state_data$positive)  * 10 / 14) # - states_historic$positive
 }
 
 
