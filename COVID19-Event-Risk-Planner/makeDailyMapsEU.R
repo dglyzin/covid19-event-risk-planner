@@ -490,6 +490,23 @@ getDataDenmark <- function(){
 }
 
 
+maplabsDenmark <- function(riskData) {
+  riskData <- riskData %>%
+    mutate(risk = case_when(
+      risk == 100 ~ '> 99',
+      risk == 0 ~ '< 1',
+      is.na(risk) ~ 'No data',
+      TRUE ~ as.character(risk)
+    ))
+  labels <- paste0(
+    "<strong>", paste0('Municipality of ', riskData$name), "</strong><br/>",
+    "Current Risk Level: <b>",riskData$risk, ifelse(riskData$risk == "No data", "", "&#37;"),"</b><br/>",
+    "Latest Update: ", substr(riskData$date, 1, 10)
+  ) %>% lapply(htmltools::HTML)
+  return(labels)
+}
+
+
 getDataRussia <- function(){
   russia_geom <<- st_read('map_data/russia.geojson')
 
@@ -545,22 +562,6 @@ maplabsRussia <- function(riskData) {
   return(labels)
 }
 
-
-maplabsDenmark <- function(riskData) {
-  riskData <- riskData %>%
-    mutate(risk = case_when(
-      risk == 100 ~ '> 99',
-      risk == 0 ~ '< 1',
-      is.na(risk) ~ 'No data',
-      TRUE ~ as.character(risk)
-    ))
-  labels <- paste0(
-    "<strong>", paste0('Municipality of ', riskData$name), "</strong><br/>",
-    "Current Risk Level: <b>",riskData$risk, ifelse(riskData$risk == "No data", "", "&#37;"),"</b><br/>",
-    "Latest Update: ", substr(riskData$date, 1, 10)
-  ) %>% lapply(htmltools::HTML)
-  return(labels)
-}
 
 getDataIreland <- function() {
     
