@@ -1,86 +1,86 @@
-region, population
-The Republic of Karelia, 637000
-The Tyva Republic, 310000
-Kursk Oblast, 1119000
-Volgograd Oblast, 2583000
-Krasnoyarsk Krai, 2847000
-Smolensk Oblast, 975000
-Altai Krai, 2399000
-The Republic of Khakassia, 533000
-Belgorod Oblast, 1541000
-The Republic of Crimea, 1958460
-Yaroslavl Oblast, 1272000
-Udmurt Republic, 1518000
-The Republic of Dagestan, 2946000
-Jewish Autonomous Oblast, 174000
-The Komi Republic, 880000
-Moscow Oblast, 7048000
-Altai Republic, 210000
-Orenburg Oblast, 2016000
-Omsk Oblast, 1974000
-Ryazan Oblast, 1144000
-The Republic of Adygea, 445000
-The Republic of Mordovia, 819000
-Magadan Oblast, 152000
-The Republic of Bashkortostan, 4061000
-Leningrad Oblast, 1751000
-Tomsk Oblast, 1064000
-The Republic of Buryatia, 972000
-Kemerovo Oblast, 2742000
-Kirov Oblast, 1319000
-Tver Oblast, 1334000
-Chelyabinsk Oblast, 3485000
-Krasnodar Krai, 5330000
-Kaliningrad Oblast, 955000
-Ivanovo Oblast, 1049000
-Lipetsk Oblast, 1162000
-The Mari El Republic, 690000
-Nizhny Novgorod Oblast, 3290000
-Saint Petersburg, 5028000
-Tula Oblast, 1532000
-Kostroma Oblast, 659000
-Penza Oblast, 1369000
-Pskov Oblast, 662000
-Samara Oblast, 3213000
-Novgorod Oblast, 626000
-Tambov Oblast, 1076000
-The Republic of Kalmykia, 284000
-Arkhangelsk Oblast, 1202000
-Kurgan Oblast, 886000
-Vladimir Oblast, 1422000
-The Sakha (Yakutia) Republic, 956000
-Irkutsk Oblast, 2422000
-Sverdlovsk Oblast, 4316000
-Vologda Oblast, 1196000
-Novosibirsk Oblast, 2710000
-Tyumen Oblast, 3511000
-Zabaykalsky Krai, 1095000
-Sakhalin Oblast, 494000
-Murmansk Oblast, 780000
-Oryol Oblast, 776000
-The Republic of North Ossetia–Alania, 706000
-Ulyanovsk Oblast, 1274000
-Khabarovsk Krai, 1342000
-Nenets Autonomous Okrug, 43000
-Kamchatka Krai, 320000
-Khanty–Mansi Autonomous Okrug – Yugra, 1584000
-Perm Krai, 2634000
-Saratov Oblast, 2503000
-The Kabardino-Balkar Republic, 859000
-Voronezh Oblast, 2330000
-The Karachay–Cherkess Republic, 472000
-Amur Oblast, 817000
-Bryansk Oblast, 1254000
-The Chuvash Republic, 1244000
-Yamalo-Nenets Autonomous Okrug, 542000
-Rostov Oblast, 4254000
-Primorsky Krai, 1947000
-Sevastopol, 398973
-The Republic of Tatarstan, 3822000
-Kaluga Oblast, 1006000
-Astrakhan Oblast, 1014000
-Stavropol Krai, 2791000
-The Republic of Ingushetia, 442000
-Moscow, 11980000
-The Chechen Republic, 1325000
-Chukotka Autonomous Okrug, 51000
+code,name, population
+KR,The Republic of Karelia,637000
+TY,The Tyva Republic,310000
+KRS,Kursk Oblast,1119000
+VGG,Volgograd Oblast,2583000
+KYA,Krasnoyarsk Krai,2847000
+SMO,Smolensk Oblast,975000
+ALT,Altai Krai,2399000
+KK,The Republic of Khakassia,533000
+BEL,Belgorod Oblast,1541000
+CR,The Republic of Crimea,1958460
+YAR,Yaroslavl Oblast,1272000
+UD,Udmurt Republic,1518000
+DA,The Republic of Dagestan,2946000
+YEV,Jewish Autonomous Oblast,174000
+KO,The Komi Republic,880000
+MOS,Moscow Oblast,7048000
+GA,Altai Republic,210000
+ORE,Orenburg Oblast,2016000
+OMS,Omsk Oblast,1974000
+RYA,Ryazan Oblast,1144000
+AD,The Republic of Adygea,445000
+MO,The Republic of Mordovia,819000
+MAG,Magadan Oblast,152000
+BA,The Republic of Bashkortostan,4061000
+LEN,Leningrad Oblast,1751000
+TOM,Tomsk Oblast,1064000
+BU,The Republic of Buryatia,972000
+KEM,Kemerovo Oblast,2742000
+KIR,Kirov Oblast,1319000
+TVE,Tver Oblast,1334000
+CHE,Chelyabinsk Oblast,3485000
+KDA,Krasnodar Krai,5330000
+KGD,Kaliningrad Oblast,955000
+IVA,Ivanovo Oblast,1049000
+LIP,Lipetsk Oblast,1162000
+ME,The Mari El Republic,690000
+NIZ,Nizhny Novgorod Oblast,3290000
+SPE,Saint Petersburg,5028000
+TUL,Tula Oblast,1532000
+KOS,Kostroma Oblast,659000
+PNZ,Penza Oblast,1369000
+PSK,Pskov Oblast,662000
+SAM,Samara Oblast,3213000
+NGR,Novgorod Oblast,626000
+TAM,Tambov Oblast,1076000
+KL,The Republic of Kalmykia,284000
+ARK,Arkhangelsk Oblast,1202000
+KGN,Kurgan Oblast,886000
+VLA,Vladimir Oblast,1422000
+SA,The Sakha (Yakutia) Republic,956000
+IRK,Irkutsk Oblast,2422000
+SVE,Sverdlovsk Oblast,4316000
+VLG,Vologda Oblast,1196000
+NVS,Novosibirsk Oblast,2710000
+TYU,Tyumen Oblast,3511000
+ZAB,Zabaykalsky Krai,1095000
+SAK,Sakhalin Oblast,494000
+MUR,Murmansk Oblast,780000
+ORL,Oryol Oblast,776000
+SE,The Republic of North Ossetia–Alania,706000
+ULY,Ulyanovsk Oblast,1274000
+KHA,Khabarovsk Krai,1342000
+NEN,Nenets Autonomous Okrug,43000
+KAM,Kamchatka Krai,320000
+KHM,Khanty–Mansi Autonomous Okrug – Yugra,1584000
+PER,Perm Krai,2634000
+SAR,Saratov Oblast,2503000
+KB,The Kabardino-Balkar Republic,859000
+VOR,Voronezh Oblast,2330000
+KC,The Karachay–Cherkess Republic,472000
+AMU,Amur Oblast,817000
+BRY,Bryansk Oblast,1254000
+CU,The Chuvash Republic,1244000
+YAN,Yamalo-Nenets Autonomous Okrug,542000
+ROS,Rostov Oblast,4254000
+PRI,Primorsky Krai,1947000
+SEV,Sevastopol,398973
+TT,The Republic of Tatarstan,3822000
+KLU,Kaluga Oblast,1006000
+AST,Astrakhan Oblast,1014000
+STA,Stavropol Krai,2791000
+IN,The Republic of Ingushetia,442000
+MOW,Moscow,11980000
+CE,The Chechen Republic,1325000
+CHU,Chukotka Autonomous Okrug,51000

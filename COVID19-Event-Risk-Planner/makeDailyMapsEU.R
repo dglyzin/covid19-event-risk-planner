@@ -510,10 +510,10 @@ maplabsDenmark <- function(riskData) {
 getDataRussia <- function(){
   russia_geom <<- st_read('map_data/russia.geojson')
 
-  data <- read.csv('/home/user/Рабочий стол/ru_script/corona_stat.csv', sep = ";") %>%
+  data <- read.csv('map_data/corona_stat.csv', sep = ";") %>%
     mutate(date = as_date(date)) %>%
     arrange(desc(date))
-  pop <- read.csv('/home/user/Рабочий стол/ru_script/russia_pop.csv', sep = ",")
+  pop <- read.csv('map_data/russia_pop.csv', sep = ",")
   
   converter <- pop %>% select(c("code", "name"))
   
@@ -647,7 +647,7 @@ for (asc_bias in asc_bias_list) {
   for (size in event_size){
 
     russia_riskdt <- russia_data_Nr %>%
-      mutate(risk = if_else(Nr > 10, round(calc_risk(Nr, size, pop)), 0))
+      mutate(risk = if_else(Nr > 10, round(calc_risk(Nr, size, population)), 0))
     
     russia_riskdt_map <- russia_geom %>% left_join(russia_riskdt, by = c("code"))
 
