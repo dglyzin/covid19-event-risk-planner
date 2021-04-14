@@ -129,14 +129,14 @@ shinyUI(fluidPage(
             "global_event_size_map",
             "Event Size: ",
             choices = event_size,
-            selected = 50,
+            selected = 100,
             grid = T
           ),
           shinyWidgets::awesomeRadio(
             inputId = "global_asc_bias",
             label = "Select Ascertainment Bias",
             choices = c("3", "5"),
-            selected = "3",
+            selected = "5",
             status = "warning",
             inline = T
           )
