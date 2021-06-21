@@ -135,8 +135,8 @@ shinyUI(fluidPage(
           shinyWidgets::awesomeRadio(
             inputId = "global_asc_bias",
             label = "Select Ascertainment Bias",
-            choices = c("3", "5"),
-            selected = "5",
+            choices = c("3", "5", "10"),
+            selected = "10",
             status = "warning",
             inline = T
           )
