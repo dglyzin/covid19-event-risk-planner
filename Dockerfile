@@ -116,7 +116,7 @@ RUN sudo echo -e "1 17 * * * /srv/shiny-server/makeDailyMaps.sh 1 \n\
 
 COPY COVID19-Event-Risk-Planner /srv/shiny-server
 
-RUN /srv/shiny-server/UpdateRussia.sh 
+RUN sh /srv/shiny-server/UpdateRussia.sh 
 RUN /srv/shiny-server/makeDailyMaps.sh 0
 RUN /srv/shiny-server/makeDailyPlots.sh
 RUN /srv/shiny-server/update_current.sh
