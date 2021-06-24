@@ -119,8 +119,8 @@ COPY COVID19-Event-Risk-Planner /srv/shiny-server
 RUN sh /srv/shiny-server/UpdateRussia.sh 
 RUN /srv/shiny-server/makeDailyMaps.sh 0
 RUN /srv/shiny-server/makeDailyPlots.sh
-RUN /srv/shiny-server/update_current.sh
-RUN /srv/shiny-server/update_daily.sh
+#RUN /srv/shiny-server/update_current.sh
+#RUN /srv/shiny-server/update_daily.sh
 
 EXPOSE 3838
 
