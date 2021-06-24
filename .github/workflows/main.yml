@@ -35,5 +35,5 @@ jobs:
       - name: deploy master
         run: |
           docker container rm -f covidcontainer || true 
-          docker run --name covidcontainer -p 3555:3838 covidrisk  
+          docker run -d --name covidcontainer -p 3838:3838 covidrisk  
 
