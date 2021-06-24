@@ -27,3 +27,12 @@ jobs:
       - name: Run a multi-line script
         run: |          
           docker build -t covidrisk .
+          
+  deploy:
+    runs-on: hse-prod      
+    steps:
+      - name: deploy master
+        run: |
+          docker container rm -f pfmon_frontend || true
+          docker run --name covidcontainer -p 3555:3838 covidrisk
+
