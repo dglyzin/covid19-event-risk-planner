@@ -33,6 +33,6 @@ jobs:
     steps:
       - name: deploy master
         run: |
-          docker container rm -f pfmon_frontend || true
+          docker container rm -f covidcontainer || true 
           docker run --name covidcontainer -p 3555:3838 covidrisk
 
