@@ -28,5 +28,12 @@ jobs:
         run: |          
           docker build -t covidrisk .
           
-  
+  deploy:
+    runs-on: hse-prod      
+    needs: build
+    steps:
+      - name: deploy master
+        run: |
+          docker container rm -f covidcontainer || true 
+          docker run --name covidcontainer -p 3555:3838 covidrisk  
 
