@@ -98,13 +98,12 @@ ENV TZ=Europe/Moscow
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN rm -f /shiny-server-1.5.14.948-amd64.deb
 
-RUN sudo echo -e "30 00 * * * /srv/shiny-server/UpdateRussia.sh \n\
-32 00 * * * /srv/shiny-server/makeDailyMaps.sh 0 \n\
-36 00 * * * /srv/shiny-server/makeDailyPlots.sh \n\
-* * * * * echo crontest > /crontest.txt \
-" > /var/spool/cron/crontabs/root
-
-RUN service cron start
+#RUN sudo echo -e "30 00 * * * /srv/shiny-server/UpdateRussia.sh \n\
+#32 00 * * * /srv/shiny-server/makeDailyMaps.sh 0 \n\
+#36 00 * * * /srv/shiny-server/makeDailyPlots.sh \n\
+#* * * * * echo crontest > /crontest.txt \
+#" > /var/spool/cron/crontabs/root
+#RUN service cron start
 
 
 #RUN mkdir /root/.ssh
