@@ -94,13 +94,13 @@ COPY Rprofile.site /usr/lib/R/etc/
 #COPY .rtweet_token.rds /root/.rtweet_token.rds
 COPY Renviron /root/.Renviron
 
-ENV TZ=America/New_York
+ENV TZ=Europe/Moscow
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN rm -f /shiny-server-1.5.14.948-amd64.deb
 
-RUN sudo echo -e "1 17 * * * /srv/shiny-server/UpdateRussia.sh \n\
-1 12 * * * /srv/shiny-server/makeDailyMaps.sh 0 \n\
-1 22 * * * /srv/shiny-server/makeDailyPlots.sh \n\
+RUN sudo echo -e "30 * * * * /srv/shiny-server/UpdateRussia.sh \n\
+32 * * * * /srv/shiny-server/makeDailyMaps.sh 0 \n\
+36 * * * * /srv/shiny-server/makeDailyPlots.sh \n\
 " > /var/spool/cron/crontabs/root
 
 #RUN mkdir /root/.ssh
