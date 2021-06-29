@@ -109,19 +109,19 @@ shinyUI(fluidPage(
     # ),
     tabPanel(
       value = "global",
-      title = "Global Risk Estimates",
+      title = "Оценка глобальных рисков",
       fluid = TRUE,
       sidebarLayout(
         sidebarPanel(
           width = 3,
           HTML(
             paste0(
-              "<p>This map shows the risk level of attending events of different sizes at within-country resolution.",
-              "<br/><br/>You can reduce the risk that one case becomes many by wearing a mask, distancing, and gathering outdoors in smaller groups<br/><br/>",
-              "The risk level is the estimated chance (0-100%) that at least 1 COVID-19 positive individual will be present at an event in a NUTS-3 level area (County, Local Authority, Council, District), given the size of the event.",
-              "<br/><br/>", "Based on seroprevalence data and increases in testing, by default we assume there are three times more cases than are being reported (3:1 ascertainment bias). In places with less testing availability, that bias may be higher. We are evaluating the inclusion of lower ascertainment biases based on increased testing.",
+              "Эта карта демонстрирует уровень риска посещения мероприятий различного масштаба с точностью до страны.",
+              "<br/><br/>Вы можете снизить риск того, что один случай заражениястанет множественным,надев маску, соблюдая дистанцию и собираясь на открытом пространстве лишь небольшим группами.<br/><br/>",
+              "Уровень риска -- это оцениваемая вероятность того,что по крайне мере один человек с положительным тестом COVID-19 на мероприятии в районе уровня NUTS-3 (округ,местный орган власти,  район) с учетом размера мероприятия.",
+              "<br/><br/>", "Основываясь на данных о серопревалентности (число людей с позитивным тестом на болезнь) и увеличении числа тестов, по умолчанию предполагается,что статистика занижена в 3 раза (3 ошибки на 1 правду). В местах,где меньше возможности сдать тест на COVID-19 такая статистика может быть занижена сильнее. Однако снижение такой погрешности будет учтена при увеличении числа тестирований.",
               "<br/><br/>",
-              "Choose an event size and ascertainment bias below.</p>"
+              "Выберите число людей, посетивших события, и ошибку тестирования ниже"
             )
           ),
           actionLink("to_data_global", "See our data sources"),
@@ -220,7 +220,7 @@ shinyUI(fluidPage(
     # ),
     tabPanel(
       id = "tuts",
-      "Tutorial",
+      "Инструкция",
       fluid = TRUE,
       mainPanel(includeMarkdown("Tutorial.md"))
     ),
